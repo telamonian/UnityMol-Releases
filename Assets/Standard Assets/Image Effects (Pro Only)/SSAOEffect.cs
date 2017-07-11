@@ -1,7 +1,6 @@
 using UnityEngine;
 
 [ExecuteInEditMode]
-[RequireComponent (typeof(Camera))]
 [AddComponentMenu("Image Effects/Screen Space Ambient Occlusion")]
 public class SSAOEffect : MonoBehaviour
 {
@@ -72,7 +71,7 @@ public class SSAOEffect : MonoBehaviour
 	}
 	
 	void OnEnable () {
-		camera.depthTextureMode |= DepthTextureMode.DepthNormals;
+		GetComponent<Camera>().depthTextureMode |= DepthTextureMode.DepthNormals;
 	}
 
 	private void CreateMaterials ()
@@ -102,10 +101,10 @@ public class SSAOEffect : MonoBehaviour
 
 		// Render SSAO term into a smaller texture
 		RenderTexture rtAO = RenderTexture.GetTemporary (source.width / m_Downsampling, source.height / m_Downsampling, 0);
-		float fovY = camera.fieldOfView;
-		float far = camera.farClipPlane;
+		float fovY = GetComponent<Camera>().fieldOfView;
+		float far = GetComponent<Camera>().farClipPlane;
 		float y = Mathf.Tan (fovY * Mathf.Deg2Rad * 0.5f) * far;
-		float x = y * camera.aspect;
+		float x = y * GetComponent<Camera>().aspect;
 		m_SSAOMaterial.SetVector ("_FarCorner", new Vector3(x,y,far));
 		int noiseWidth, noiseHeight;
 		if (m_RandomTexture) {

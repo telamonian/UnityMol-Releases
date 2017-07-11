@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 /// @file Particleball.shader
 /// @brief Details to be specified
 /// @author FvNano/LBT team
@@ -117,7 +119,7 @@ Category {
 			v2f vert (appdata_t v)
 			{
 				v2f o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.color = v.color;
 				o.texcoord = TRANSFORM_TEX(v.texcoord,_MainTex);
 				return o;
@@ -127,7 +129,7 @@ Category {
 			
 			fixed4 frag (v2f i) : COLOR
 			{
-				fixed4 tempcolor : COLOR;
+				fixed4 tempcolor;
 				tempcolor.r=tex2D(_MainTex, i.texcoord).r;
 				tempcolor.g=tex2D(_MainTex, i.texcoord).g;
 				

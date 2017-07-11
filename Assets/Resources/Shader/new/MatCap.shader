@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 /// @file MatCap.shader
 /// @brief Details to be specified
 /// @author FvNano/LBT team
@@ -96,9 +98,9 @@ Shader "MatCap" {
  
                 struct v2f {
                     float4 pos : SV_POSITION;
-                    float2  uv;
-                    float3  TtoV0;
-                    float3  TtoV1;
+                    float2  uv : TEXCOORD0;
+                    float3  TtoV0 : TANGENT0;
+                    float3  TtoV1 : TANGENT1;
                 };
  
                 uniform float4 _BumpMap_ST;
@@ -106,7 +108,7 @@ Shader "MatCap" {
                 v2f vert (appdata_tan v)
                 {
                     v2f o;
-                    o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
+                    o.pos = UnityObjectToClipPos (v.vertex);
                     o.uv = TRANSFORM_TEX(v.texcoord,_BumpMap);
  
                     TANGENT_SPACE_ROTATION;

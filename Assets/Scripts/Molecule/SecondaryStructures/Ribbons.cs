@@ -245,8 +245,11 @@ public class Ribbons {
 	private void ConstructControlPoints(List<Dictionary<string, Vector3>> residueDicts, int res, int ss, int handedness) {
 		//Debug.Log("Ribbons.cs::ConstructControlPoints > Beginning.");
 		Vector3 ca0, ox0, ca1;
-		Vector3 p0, p1, p2, p3;
-		
+        ca0 = new Vector3 ();
+        ox0 = new Vector3 ();
+        ca1 = new Vector3 ();
+        
+        Vector3 p0, p1, p2, p3;
 		p1 = p2 = p3 = Vector3.zero;
 		
 		Dictionary<string, Vector3> res0, res1;
