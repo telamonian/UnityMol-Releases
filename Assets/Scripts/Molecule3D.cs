@@ -250,8 +250,11 @@ public class Molecule3D:MonoBehaviour {
 			GUIMoleculeController.FileBrowser_show=false;
 		
 		UIData.EnableUpdate=false;
-		if((!UIData.hiddenUI)&&(!UIData.hiddenUIbutFPS))
+		if((!UIData.hiddenUI) && (!UIData.hiddenUIbutFPS)){
 			gUIDisplay.Display();
+		}else{
+			gUIDisplay.gUIMoleculeController.CameraStop();
+		}
 		
 		if((!UIData.hiddenUI)&&(UIData.hiddenUIbutFPS)){
 			GUIMoleculeController.toggle_INFOS = true;
